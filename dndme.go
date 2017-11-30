@@ -33,11 +33,11 @@ func roll(input []string) {
 	var dice_input []string= strings.Split(input[0], "d")
 	minimum_roll, minimum_roll_err := strconv.Atoi(dice_input[0])
 	maximum_roll, maximum_roll_err := strconv.Atoi(dice_input[1])
-	if minimum_roll_err and maximum_roll_err {
-		fmt.Printf("hullo %v", minimum_roll_err)
-		fmt.Println(random(minimum_roll, maximum_roll))
+	if minimum_roll_err != nil && maximum_roll_err != nil {
+		fmt.Println("You probably didn't enter a valid number for the dice. :(")
+	} else {
+		fmt.Println(random(minimum_roll, maximum_roll * minimum_roll))
 	}
-
 }
 
 func help(input []string) {
