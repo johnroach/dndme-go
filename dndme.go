@@ -35,8 +35,8 @@ func random(min, max int) int {
 func roll(input []string) {
 	var diceInput = strings.Split(input[0], "d")
 	minimumRoll, maximumRollErr := strconv.Atoi(diceInput[0])
-	maximumRoll, maximumRollErr := strconv.Atoi(diceInput[1])
-	if maximumRollErr != nil && maximumRollErr != nil {
+	maximumRoll, minimumRollErr := strconv.Atoi(diceInput[1])
+	if maximumRollErr != nil && minimumRollErr != nil {
 		fmt.Println("You probably didn't enter a valid number for the dice. :(")
 	} else {
 		fmt.Println(random(minimumRoll, maximumRoll * minimumRoll))
@@ -64,12 +64,14 @@ func main() {
 
 	fmt.Println("Welcome to dndme!")
 
-	promptInput := strings.Split(prompt.Input("> ", completer), " ")
-	baseCommand := promptInput[0]
-	_, ok := commands[baseCommand]
-	if ok {
-		commands[baseCommand].Fn(append(promptInput[:0], promptInput[1:]...))
-	} else {
-		fmt.Println("key not found")
+	for{
+		promptInput := strings.Split(prompt.Input("> ", completer), " ")
+		baseCommand := promptInput[0]
+		_, ok := commands[baseCommand]
+		if ok {
+			commands[baseCommand].Fn(append(promptInput[:0], promptInput[1:]...))
+		} else {
+			fmt.Println("key not found")
+		}
 	}
 }
