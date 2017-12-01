@@ -68,10 +68,17 @@ func main() {
 		promptInput := strings.Split(prompt.Input("> ", completer), " ")
 		baseCommand := promptInput[0]
 		_, ok := commands[baseCommand]
-		if ok {
-			commands[baseCommand].Fn(append(promptInput[:0], promptInput[1:]...))
+		if baseCommand != "exit"{
+			if ok {
+				commands[baseCommand].Fn(append(promptInput[:0], promptInput[1:]...))
+			} else {
+				fmt.Println("key not found")
+			}
 		} else {
-			fmt.Println("key not found")
+			break
 		}
+
 	}
+
+	fmt.Println("Goodbye!")
 }
